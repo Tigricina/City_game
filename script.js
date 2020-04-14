@@ -14,9 +14,6 @@ const cities = data.map(function(el) {
 const input = document.querySelector('#input');
 const button = document.querySelector('#submit');
 let lastCityUsed = '';
-let str = lastCityUsed[lastCityUsed.length - 1];
-
-
 
 button.addEventListener('click', handleButtonClick);
 
@@ -27,9 +24,7 @@ function handleButtonClick() {
 }
 
 function validateCity(city) {
-
   city = city.toLowerCase();
-
   const valid = cities.indexOf(city) > -1;
 
   if (valid) { // (2)
@@ -45,14 +40,7 @@ function validateCity(city) {
       usedCities.push(city); // (5)
       alert('Found ya');
       lastCityUsed = city;
-      const str = lastCityUsed[lastCityUsed.length - 1];
-      str.replace(/[йыъь]/g, "");
-      console.log(lastCityUsed);
-/*
-function removeVowels(str){
-  return str.replace(/[йыъь]/g, "");
-}
-*/
+      removeVowels();
       pcAnswer(city);
     }
   } else {
@@ -61,21 +49,17 @@ function removeVowels(str){
   }
 }
 
-/*function checkLetter(city) { 
-  if (!lastCityUsed) return true;
-  console.log(!lastCityUsed);
-  console.log(lastCityUsed);
-  // check if 1st letter of city === last city used last letter
-}*/
-
-
-
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function random(cities) {
 	return cities[getRandomInt(0, cities.length - 1)];
 }
+
+function removeVowels() {
+  const str =  lastCityUsed[lastCityUsed.length - 1].replace(/[йыъь]/g, "");
+  return lastCityUsed.push(str); 
+  };
 
 function pcAnswer(city) {
   
@@ -91,16 +75,34 @@ function pcAnswer(city) {
     console.log('PC turn:', lastCityUsed);
     console.log(lastCityUsed[lastCityUsed.length - 1]);
     console.log("meow");
-    console.log(typeof lastCityUsed[lastCityUsed.length - 1]);
-    
-/*
-function removeVowels(str){
-  return str.replace(/[йыъь]/g, "");
-}*/
-    
+    console.log(typeof lastCityUsed[lastCityUsed.length - 1]); 
+ 
   }
+
 }
 
 
 
+/*в консоли работает:
+let lastCityUsed = ['токио', 'москва', 'островский']; 
 
+function removeVowels() {
+const str = lastCityUsed[lastCityUsed.length - 1];
+return lastCityUsed.push(str.replace(/[йыъь]/g, ""));
+};
+
+console.log(removeVowels());
+console.log(lastCityUsed);*/
+
+
+/*  тоже работает в консоли, это просто более аккуратнная запись
+lastCityUsed = ['москва', 'Архангельск', 'островский']
+
+function removeVowels() {
+const str =  lastCityUsed[lastCityUsed.length - 1].replace(/[йыъь]/g, "");
+return lastCityUsed.push(str); 
+};
+
+console.log(removeVowels());
+console.log(lastCityUsed);
+*/
