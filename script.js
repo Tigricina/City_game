@@ -8,7 +8,7 @@
 */
 const usedCities = [];
 const cities = data.map(function(el) {
-  return el.city.toLowerCase();
+  return el.city.toLowerCase().replace(/[йыъь]/g, "");
 });
 
 const input = document.querySelector('#input');
@@ -40,8 +40,8 @@ function validateCity(city) {
       usedCities.push(city); // (5)
       alert('Found ya');
       lastCityUsed = city;
-      removeVowels();
-      pcAnswer(city);
+      
+      pcAnswer();
     }
   } else {
     alert('No such gorod!');
@@ -56,12 +56,8 @@ function random(cities) {
 	return cities[getRandomInt(0, cities.length - 1)];
 }
 
-function removeVowels() {
-  const str =  lastCityUsed[lastCityUsed.length - 1].replace(/[йыъь]/g, "");
-  return lastCityUsed.push(str); 
-  };
 
-function pcAnswer(city) {
+function pcAnswer() {
   
   do {city = random(cities);}
   while (city[0] !== lastCityUsed[lastCityUsed.length - 1])
